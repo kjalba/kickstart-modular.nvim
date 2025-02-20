@@ -37,7 +37,7 @@ vim.opt.smartcase = true
 vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 50
 
 -- Decrease mapped sequence wait time
 vim.opt.timeoutlen = 300
@@ -54,11 +54,45 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
+vim.opt.incsearch = true
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 8
 
--- vim: ts=2 sts=2 sw=2 et
+vim.opt.guicursor = ''
+vim.opt.nu = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undofile = true
+
+vim.opt.signcolumn = 'yes'
+
+-- Enable folding ( setup in nvim-ufo )
+vim.o.foldenable = true -- Enable folding by default
+vim.o.foldmethod = 'manual' -- Default fold method (change as needed)
+vim.o.foldlevel = 99 -- Open most folds by default
+vim.o.foldcolumn = '0'
+
+-- backspace
+vim.opt.backspace = { 'start', 'eol', 'indent' }
+
+vim.opt.isfname:append '@-@'
+vim.opt.colorcolumn = '80'
+
+vim.opt.hlsearch = true
+
+-- gets rid of line with white spaces
+vim.g.editorconfig = true
