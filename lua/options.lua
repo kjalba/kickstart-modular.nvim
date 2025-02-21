@@ -96,3 +96,6 @@ vim.opt.hlsearch = true
 
 -- gets rid of line with white spaces
 vim.g.editorconfig = true
+
+-- This is to enable tailwind-tools colorizer to work properly
+vim.o.termguicolors = true
