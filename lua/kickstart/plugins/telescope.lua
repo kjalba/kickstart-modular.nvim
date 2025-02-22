@@ -108,6 +108,15 @@ return {
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Telescope functionality in my Zettelkasten directory
+      vim.keymap.set('n', '<leader>zf', function()
+        builtin.find_files { cwd = '~/Zettelkasten' }
+      end, { desc = 'Find files in Zettelkasten' })
+
+      vim.keymap.set('n', '<leader>zg', function()
+        builtin.live_grep { cwd = '~/Zettelkasten' }
+      end, { desc = 'Grep in Zettelkasten' })
     end,
   },
 }
