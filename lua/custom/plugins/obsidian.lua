@@ -24,6 +24,7 @@ return {
         path = '~/Zettelkasten',
       },
     },
+    disable_frontmatter = true, -- Disable automatic frontmatter insertion
     ui = { enable = false },
 
     -- see below for full list of options 👇
