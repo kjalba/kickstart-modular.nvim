@@ -106,5 +106,3 @@ vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
 vim.keymap.set('n', 's', '<Nop>')
 
 vim.keymap.set('n', '<leader>zx', '<cmd>!chmod +x %<CR>', vim.tbl_extend('force', opts, { desc = 'Makes file executable' }))
--- TODO:
--- vim.keymap.set('n', '<leader>zt', '', vim.tbl_extend('force', opts, { desc = 'Searches Zettelkasten notes' }))
