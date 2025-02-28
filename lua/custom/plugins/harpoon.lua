@@ -46,18 +46,18 @@ return {
     end)
 
     --Harpoon marked files
-    vim.keymap.set('n', '<C-1>', function()
+    vim.keymap.set('n', '<leader>1', function()
       harpoon:list():select(1)
-    end)
-    vim.keymap.set('n', '<C-2>', function()
+    end, { desc = 'Harpoon switch to 1st file' })
+    vim.keymap.set('n', '<leader>2', function()
       harpoon:list():select(2)
-    end)
-    vim.keymap.set('n', '<C-3>', function()
+    end, { desc = 'Harpoon switch to 2nd file' })
+    vim.keymap.set('n', '<leader>3', function()
       harpoon:list():select(3)
-    end)
-    vim.keymap.set('n', '<C-4>', function()
+    end, { desc = 'Harpoon switch to 3rd file' })
+    vim.keymap.set('n', '<leader>4', function()
       harpoon:list():select(4)
-    end)
+    end, { desc = 'Harpoon switch to 4th file' })
 
     -- Toggle previous & next buffers stored within Harpoon list
     vim.keymap.set('n', '<C-S-P>', function()
