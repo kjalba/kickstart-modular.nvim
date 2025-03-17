@@ -42,7 +42,7 @@ return {
         html = { 'prettier' },
         json = { 'prettier' },
         yaml = { 'prettier' },
-        markdown = { 'prettierd', 'prettier' },
+        markdown = { 'prettierd', stop_after_first = true },
         graphql = { 'prettier' },
         liquid = { 'prettier' },
         python = { 'ruff' },
