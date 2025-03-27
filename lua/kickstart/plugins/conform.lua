@@ -27,7 +27,7 @@ return {
           lsp_format_opt = 'fallback'
         end
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_format = lsp_format_opt,
         }
       end,
@@ -42,7 +42,7 @@ return {
         html = { 'prettier' },
         json = { 'prettier' },
         yaml = { 'prettier' },
-        markdown = { 'prettierd', stop_after_first = true },
+        -- markdown = { 'prettier' },
         graphql = { 'prettier' },
         liquid = { 'prettier' },
         python = { 'ruff' },
