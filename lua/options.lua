@@ -100,13 +100,13 @@ vim.g.editorconfig = true
 vim.o.termguicolors = true
 
 -- -- Auto-wrap for markdown files (stronger version)
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = { 'markdown', 'text' },
---   callback = function()
---     vim.bo.textwidth = 80 -- Buffer-local setting
---     vim.wo.wrap = true -- Window-local setting
---     vim.wo.linebreak = true
---     vim.wo.breakindent = true
---     vim.bo.formatoptions = vim.bo.formatoptions .. 't'
---   end,
--- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'text' },
+  callback = function()
+    vim.bo.textwidth = 80 -- Buffer-local setting
+    vim.wo.wrap = true -- Window-local setting
+    vim.wo.linebreak = true
+    vim.wo.breakindent = true
+    vim.bo.formatoptions = vim.bo.formatoptions .. 't'
+  end,
+})
