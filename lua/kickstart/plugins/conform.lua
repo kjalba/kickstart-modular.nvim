@@ -42,7 +42,7 @@ return {
         html = { 'prettier' },
         json = { 'prettier' },
         yaml = { 'prettier' },
-        -- markdown = { 'prettier' },
+        markdown = { 'prettier' },
         graphql = { 'prettier' },
         liquid = { 'prettier' },
         python = { 'ruff' },
@@ -52,6 +52,21 @@ return {
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
+      -- formatters = {
+      --   prettier = {
+      --     prepend_args = function(self, ctx)
+      --       if ctx.filetype == 'markdown' then
+      --         return {
+      --           '--print-width',
+      --           '80',
+      --           '--prose-wrap',
+      --           'always',
+      --         }
+      --       end
+      --       return {}
+      --     end,
+      --   },
+      -- },
     },
   },
 }

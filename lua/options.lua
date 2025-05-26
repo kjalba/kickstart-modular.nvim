@@ -32,7 +32,6 @@ vim.opt.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
 
@@ -99,3 +98,15 @@ vim.g.editorconfig = true
 
 -- This is to enable tailwind-tools colorizer to work properly
 vim.o.termguicolors = true
+
+-- -- Auto-wrap for markdown files (stronger version)
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = { 'markdown', 'text' },
+--   callback = function()
+--     vim.bo.textwidth = 80 -- Buffer-local setting
+--     vim.wo.wrap = true -- Window-local setting
+--     vim.wo.linebreak = true
+--     vim.wo.breakindent = true
+--     vim.bo.formatoptions = vim.bo.formatoptions .. 't'
+--   end,
+-- })
