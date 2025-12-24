@@ -117,6 +117,8 @@ return {
       vim.keymap.set('n', '<leader>zg', function()
         builtin.live_grep { cwd = '~/Zettelkasten' }
       end, { desc = 'Grep in Zettelkasten' })
+
+      require('kickstart.telescope.multigrep').setup()
     end,
   },
 }
