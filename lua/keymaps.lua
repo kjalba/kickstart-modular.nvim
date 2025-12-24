@@ -74,7 +74,7 @@ vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
 -- vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', vim.tbl_extend('force', opts, { desc = 'Close current buffer' }))
+-- vim.keymap.set('n', '<leader>x', ':bdelete!<CR>', vim.tbl_extend('force', opts, { desc = 'Close current buffer' }))
 vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', vim.tbl_extend('force', opts, { desc = 'Open new buffer' }))
 
 -- Toggle line wrapping
@@ -106,3 +106,7 @@ vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
 vim.keymap.set('n', 's', '<Nop>')
 
 vim.keymap.set('n', '<leader>zx', '<cmd>!chmod +x %<CR>', vim.tbl_extend('force', opts, { desc = 'Makes file executable' }))
+
+vim.keymap.set('n', '<leader>xf', '<cmd>source %<CR>')
+vim.keymap.set('n', '<leader>xl', ':.lua<CR>')
+vim.keymap.set('v', '<leader>xl', ':lua<CR>')
