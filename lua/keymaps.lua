@@ -107,6 +107,11 @@ vim.keymap.set('n', 's', '<Nop>')
 
 vim.keymap.set('n', '<leader>zx', '<cmd>!chmod +x %<CR>', vim.tbl_extend('force', opts, { desc = 'Makes file executable' }))
 
+-- Sources entire file and allows me to execute single line in Lua
 vim.keymap.set('n', '<leader>xf', '<cmd>source %<CR>')
 vim.keymap.set('n', '<leader>xl', ':.lua<CR>')
 vim.keymap.set('v', '<leader>xl', ':lua<CR>')
+
+-- Easier navigation in Quickfix list
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
+vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
