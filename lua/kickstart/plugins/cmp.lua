@@ -42,6 +42,8 @@ return {
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
 
+      require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/custom/snippets/' }
+
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -96,6 +98,12 @@ return {
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
+
+          ['<C-e>'] = cmp.mapping(function()
+            if luasnip.choice_active() then
+              luasnip.change_choice(1)
             end
           end, { 'i', 's' }),
 
