@@ -219,6 +219,7 @@ return {
         yamlls = {},
         dockerls = {},
         html = {},
+        clangd = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -241,6 +242,17 @@ return {
               -- diagnostics = { disable = { 'missing-fields' } },
             },
           },
+        },
+
+        pico8_ls = {
+          -- Explicitly set the command (usually auto-detected, but good to be safe)
+          cmd = { 'pico8-ls', '--stdio' },
+
+          -- IMPORTANT: Treat these filetypes as valid for this LSP
+          filetypes = { 'pico8', 'p8', 'lua' },
+
+          -- This defines the root directory so the LSP knows where your project starts
+          root_dir = require('lspconfig.util').root_pattern('*.p8', '*.lua', '.git'),
         },
 
         -- Typst LSP
