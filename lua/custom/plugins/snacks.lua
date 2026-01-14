@@ -109,9 +109,6 @@ return {
         },
       },
       image = {
-        enabled = function()
-          return vim.bo.filetype == 'markdown'
-        end,
         doc = {
           float = false, -- show image on cursor hover
           inline = false, -- show image inline
