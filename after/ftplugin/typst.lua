@@ -4,13 +4,59 @@ vim.opt_local.spelllang = 'en_us'
 vim.opt_local.wrap = true
 vim.opt_local.linebreak = true
 
--- 2. PREVIEW KEYMAP (this is your old, working keymap)
-vim.keymap.set('n', '<leader>p', ':TypstPreview<CR>', {
-  buffer = true,
-  desc = '[P]review Typst document',
-})
+-------------------------------------------------------------------------------
+-- 2. HELPER FUNCTIONS (GIT ROOT & WATCH)
+-------------------------------------------------------------------------------
 
--- 3. EXPORT LOGIC (this is the new code you found)
+local function get_git_root()
+  local dot_git = vim.fn.finddir('.git', '.;')
+  if dot_git ~= '' then
+    return vim.fn.fnamemodify(dot_git, ':h')
+  end
+  return vim.fn.getcwd()
+end
+
+local function typst_watch()
+  local root = get_git_root()
+  local current_file = vim.fn.expand '%'
+
+  -- Open a vertical split on the right
+  vim.cmd 'botright vsplit'
+  vim.cmd 'vertical resize 30'
+
+  -- Run the watch command in a terminal buffer
+  -- We use shellescape to handle spaces in filenames
+  local cmd = 'typst watch --root ' .. root .. ' ' .. vim.fn.shellescape(current_file)
+  vim.cmd('term ' .. cmd)
+
+  -- Move cursor back to the main editor window
+  vim.cmd 'wincmd h'
+end
+
+local function open_in_sioyek()
+  local pdf_path = vim.fn.expand '%:p:r' .. '.pdf'
+
+  -- 1. Check if the PDF actually exists
+  if vim.fn.filereadable(pdf_path) == 0 then
+    print '⚠️ PDF not found! Run <leader>fc (Watch) or <leader>ep (Export) first.'
+    return
+  end
+
+  -- 2. Use the modern async system call
+  -- This won't "hang" your editor and works better with macOS pathing
+  vim.system({ 'sioyek', '--reuse-window', pdf_path }, { detach = true }, function(obj)
+    if obj.code ~= 0 then
+      -- Schedule the print to happen on the main thread
+      vim.schedule(function()
+        print("❌ Sioyek Error: Make sure 'sioyek' is in your $PATH. Code: " .. obj.code)
+      end)
+    end
+  end)
+end
+
+-------------------------------------------------------------------------------
+-- 3. EXPORT LOGIC
+-------------------------------------------------------------------------------
 local export_types = { 'pdf', 'png', 'svg', 'html' }
 
 local function export(args)
@@ -44,7 +90,9 @@ local function export(args)
   end
 end
 
--- 4. TELESCOPE PICKER LOGIC (also from the new code)
+-------------------------------------------------------------------------------
+-- 4. TELESCOPE PICKER LOGIC
+-------------------------------------------------------------------------------
 local function export_picker()
   local filetype = vim.bo.filetype
   if filetype ~= 'typst' then
@@ -52,7 +100,6 @@ local function export_picker()
     return
   end
 
-  -- Require telescope parts inside the function
   local pickers = require 'telescope.pickers'
   local finders = require 'telescope.finders'
   local conf = require('telescope.config').values
@@ -78,7 +125,11 @@ local function export_picker()
     :find()
 end
 
--- 5. CREATE VIM COMMANDS
+-------------------------------------------------------------------------------
+-- 5. COMMANDS & KEYMAPS
+-------------------------------------------------------------------------------
+
+-- Commands
 vim.api.nvim_create_user_command('Export', export, {
   nargs = '?',
   complete = function()
@@ -87,10 +138,17 @@ vim.api.nvim_create_user_command('Export', export, {
 })
 vim.api.nvim_create_user_command('ExportPicker', export_picker, {})
 
--- 6. EXPORT KEYMAP (this is the final piece)
-vim.keymap.set('n', '<leader>ep', function()
-  vim.cmd ':ExportPicker'
-end, {
-  buffer = true,
-  desc = '[E]xport [P]roject',
-})
+-- Keymaps
+local opts = { buffer = true, silent = true }
+
+-- Preview (Plugin-based)
+vim.keymap.set('n', '<leader>dp', ':TypstPreview<CR>', vim.tbl_extend('force', opts, { desc = '[P]review Typst [D]ocument' }))
+
+-- Export Picker
+vim.keymap.set('n', '<leader>de', ':ExportPicker<CR>', vim.tbl_extend('force', opts, { desc = '[E]xport [D]ocument' }))
+
+-- Watch in side terminal
+vim.keymap.set('n', '<leader>dw', typst_watch, vim.tbl_extend('force', opts, { desc = '[D]ocument [W]atch' }))
+
+-- Open PDF in Sioyek
+vim.keymap.set('n', '<leader>dr', open_in_sioyek, vim.tbl_extend('force', opts, { desc = '[D]ocument [R]ead (Sioyek)' }))
